@@ -1,7 +1,7 @@
 from typing import List, Optional
 
-from sqlmodel import Field, Relationship, SQLModel, create_engine, select
-from pydantic import Extra, BaseModel
+from pydantic import Extra
+from sqlmodel import Field, Relationship, SQLModel
 
 
 class HeroTeamLink(SQLModel, table=True):
@@ -19,6 +19,7 @@ class HeroTeamLink(SQLModel, table=True):
     # class Config:
     #     extra = Extra.forbid
 
+
 class Team(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str = Field(index=True)
@@ -28,6 +29,7 @@ class Team(SQLModel, table=True):
 
     class Config:
         extra = Extra.forbid
+
 
 class Hero(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)

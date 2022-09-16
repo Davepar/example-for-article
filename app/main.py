@@ -1,9 +1,9 @@
-from typing import List, Optional
+from typing import List
 
+from fastapi import Depends, FastAPI
 from sqlmodel import Session, SQLModel, create_engine
-from fastapi import FastAPI, Depends
-from . import models, crud
 
+from . import crud, models
 
 app = FastAPI()
 
@@ -13,6 +13,7 @@ sqlite_url = f"sqlite:///{sqlite_file_name}"
 
 engine = create_engine(sqlite_url, echo=True)
 
+
 def get_session():
     with Session(engine) as session:
         yield session
@@ -20,6 +21,7 @@ def get_session():
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
+
 
 @app.on_event("startup")
 def on_startup():
@@ -34,6 +36,7 @@ def get_heroes(*, session: Session = Depends(get_session)):
 @app.get("/teams", response_model=List[models.Team])
 def get_teams(*, session: Session = Depends(get_session)):
     return crud.read_teams(session)
+
 
 @app.get("/links", response_model=List[models.HeroTeamLink])
 def get_links(*, session: Session = Depends(get_session)):
