@@ -1,0 +1,10 @@
+- team__team__name: Z-Force
+  hero__hero__name: Deadpond
+- team__team__name: Preventers
+  hero__hero__name: Deadpond
+  is_training: true
+- team__team__name: Preventers
+  hero__hero__name: Spider-Boy
+  is_training: true
+- team__team__name: Preventers
+  hero__hero__name: Rusty-Man

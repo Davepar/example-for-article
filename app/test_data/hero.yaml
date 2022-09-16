@@ -1,0 +1,7 @@
+- name: Deadpond
+  secret_name: Dive Wilson
+- name: Rusty-Man
+  secret_name: Tommy Sharp
+  age: 48
+- name: Spider-Boy
+  secret_name: Pedro Parqueador
