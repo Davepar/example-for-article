@@ -16,6 +16,8 @@ class HeroTeamLink(SQLModel, table=True):
     team: "Team" = Relationship(back_populates="hero_links")
     hero: "Hero" = Relationship(back_populates="team_links")
 
+    # Can't use the extra config here, otherwise it will complain
+    # about the relationship fields.
     # class Config:
     #     extra = Extra.forbid
 

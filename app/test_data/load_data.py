@@ -9,19 +9,19 @@ LINK_KEY = "name"
 link_data: Dict[str, Any] = {}
 
 
-def _load_table(session: Session, model, filename: str):
-    data = yaml.safe_load(open(f"app/test_data/{filename}.yaml"))
+def _load_table(session: Session, model, model_name: str):
+    data = yaml.safe_load(open(f"app/test_data/{model_name}.yaml"))
     for entry in data:
         entry_keys = list(entry.keys())
         for key in entry_keys:
             if key.endswith(f"__{LINK_KEY}"):
-                (relation_key, filename_key, _) = key.split("__")
-                entry[relation_key] = link_data[f"{filename_key}__{entry[key]}"]
+                (relation_key, model_name_key, _) = key.split("__")
+                entry[relation_key] = link_data[f"{model_name_key}__{entry[key]}"]
                 # Delete the link key to avoid warnings about extra keys
                 del entry[key]
         obj = model.validate(entry)
         if LINK_KEY in entry_keys:
-            link_data[f"{filename}__{entry[LINK_KEY]}"] = obj
+            link_data[f"{model_name}__{entry[LINK_KEY]}"] = obj
         session.add(obj)
 
 
